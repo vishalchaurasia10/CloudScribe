@@ -20,6 +20,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>
+            <Contact/>
             <Footer />
           </div>
         </BrowserRouter>
