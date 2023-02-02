@@ -2,10 +2,10 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import About from './components/About';
 import Contact from './components/Contact';
 import NoteState from './context/notes/NoteState';
 import Footer from './components/Footer';
+import Notes from './components/Notes';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/addnote" />
-              <Route path="/notes" />
+              <Route path="/notes" element={<Notes/>} />
               <Route path="/about" />
               {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>

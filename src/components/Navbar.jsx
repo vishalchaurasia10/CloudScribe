@@ -33,15 +33,15 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className=' fixed w-full z-50'>
-        <div className="navWrapperLargeScreen p-2 backdrop-blur-md hidden lg:flex justify-between items-center px-8">
+      <nav className=' fixed top-0 shadow-2xl w-full z-50'>
+        <div className="navWrapperLargeScreen p-2 bg-[rgba(255,255,255,0.2)] backdrop-blur-2xl hidden lg:flex justify-between items-center px-8">
 
           <div className="left">
             <div className="logo font-bold text-2xl">Cloud Scribe</div>
           </div>
 
           <div className="center">
-            <ul className='flex justify-center font-poppins text-lg items-center space-x-8'>
+            <ul className='flex justify-center  font-poppins text-lg items-center space-x-8'>
               <li className={`flex flex-col`}>
                 <Link to="/">Home</Link>
                 <span className={`bg-orange-400 ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
@@ -75,31 +75,31 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="navwrapperSmallScreen flex lg:hidden p-2 backdrop-blur-md justify-between items-center">
+        <div className="navwrapperSmallScreen bg-[rgba(255,255,255,0.2)] backdrop-blur-2xl flex lg:hidden p-2 justify-between items-center">
           <div className="left">
             <h1 className='logo font-bold text-2xl' >Cloud Scribe</h1>
           </div>
 
           <div className="right flex items-center space-x-2">
-            <FontAwesomeIcon className='text-slate-500' icon={faSearch} />
+            <FontAwesomeIcon className='text-black' icon={faSearch} />
 
             <div className="mode flex flex-col h-5 overflow-hidden">
               <div className={`flex flex-col transition-all duration-500 ${mode === 'light' ? '' : '-translate-y-8'}  space-y-4`}>
-                <FontAwesomeIcon className={`w-5 h-5 text-blue-400`} id='moon' onClick={changeMode} icon={faMoon} />
-                <FontAwesomeIcon className={` w-4 h-4 pl-[0.1rem] transition-all duration-500 text-blue-400`} id='sun' onClick={changeMode} icon={faSun} />
+                <FontAwesomeIcon className={`w-5 h-5 text-black`} id='moon' onClick={changeMode} icon={faMoon} />
+                <FontAwesomeIcon className={` w-4 h-4 pl-[0.1rem] transition-all duration-500 text-black`} id='sun' onClick={changeMode} icon={faSun} />
               </div>
             </div>
             <div className="hamburger z-50 space-y-1">
-              <div onClick={expandNav} className={`${expand ? '-rotate-45 translate-y-[0.45rem]' : ''} w-6 transition-all duration-300 rounded-full bg-slate-400 h-1`}></div>
-              <div onClick={expandNav} className={`${expand ? 'scale-0' : ''} w-6 transition-all duration-300 rounded-full bg-slate-400 h-1`}></div>
-              <div onClick={expandNav} className={`${expand ? 'rotate-45 -translate-y-2' : ''} w-6 transition-all duration-300 rounded-full bg-slate-400 h-1`}></div>
+              <div onClick={expandNav} className={`${expand ? '-rotate-45 translate-y-[0.45rem]' : ''} w-6 transition-all duration-300 rounded-full bg-black h-1`}></div>
+              <div onClick={expandNav} className={`${expand ? 'scale-0' : ''} w-6 transition-all duration-300 rounded-full bg-black h-1`}></div>
+              <div onClick={expandNav} className={`${expand ? 'rotate-45 -translate-y-2' : ''} w-6 transition-all duration-300 rounded-full bg-black h-1`}></div>
             </div>
           </div>
 
 
         </div>
       </nav>
-      <div className={`expanded lg:hidden transition-all duration-500 fixed h-screen z-30 w-full flex items-center justify-center backdrop-blur-lg ${expand ? '' : 'translate-x-[30rem]'}`}>
+      <div className={`expanded lg:hidden transition-all duration-500 fixed h-screen z-30 w-full flex items-center justify-center backdrop-blur-lg ${expand ? '' : 'translate-x-[60rem]'}`}>
         <div className="navItems">
           <ul className='flex flex-col space-y-3 justify-center font-poppins text-lg items-center'>
             <li className="logo font-bold text-2xl">Cloud Scribe</li>

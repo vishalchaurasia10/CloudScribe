@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost&family=Poppins&display=swap');
 
+.noteItem:hover .edits {
+    transform: translateX(0rem);
+    /* transition-property: all; */
+    /* transition-duration: 500ms; */
+  }
+  
 
 @tailwind base;
 @tailwind components;

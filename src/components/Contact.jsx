@@ -32,8 +32,8 @@ const Contact = () => {
     <div ref={targetRef} className={`contact ${isInView ? ' scale-100' : 'scale-0'} relative transition-all duration-1000 lg:top-20 backdrop-blur-lg lg:flex border border-[rgba(255,255,255,0.1)] shadow-2xl rounded-2xl m-1 lg:p-8 lg:mx-32`}>
       <div className="details space-y-8 p-6 lg:w-1/2">
         <h1 className='text-6xl font-jost font-bold'>We believe there's a better way to Scale your Business.</h1>
-        <p className='text-xl font-medium text-[#392E33]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor commodi assumenda possimus corporis odit harum tempora ipsam laborum asperiores totam.</p>
-        <Button title='Get Started!' padding={3} />
+        <p className='text-xl font-medium text-[#392E33]'>Thank you for visiting our website! If you have any questions, concerns, or feedback, please don't hesitate to reach out to us. Our team is dedicated to providing excellent customer service and support.</p>
+        <Button title='Get Started!' padding={2} />
       </div>
       <div className="form p-6 lg:p-0 lg:w-1/2">
         <h1 className='text-2xl font-bold font-jost'>Got a
@@ -46,7 +46,7 @@ const Contact = () => {
           <input className='outline-none border-slate-400 drop-shadow-sm border-2 rounded-xl p-4' type="email" placeholder='Enter Email Address' name="email" id="email" />
           <textarea className='outline-none border-slate-400 drop-shadow-sm border-2 rounded-xl p-4' name="" id="" placeholder='Tell Us Something About Your Project' cols="30" rows="4"></textarea>
         </form>
-        <Button title='Contact Me' padding='3' />
+        <Button title='Contact Me' padding='2' />
       </div>
     </div>
   )
