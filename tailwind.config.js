@@ -8,7 +8,16 @@ module.exports = {
       fontFamily : {
         'jost': ['Jost', 'sans-serif'],
         'poppins': ['Poppins', 'sans-serif'],
-      }
+      },
+      keyframes : {
+        expand : {
+          '0%' : { width: '0%' },
+          '100%' : { width: '100%' },
+        }
+      },
+      animation : {
+        expand : 'expand 0.5s ease-in-out',
+      },
     },
   },
   plugins: [],
