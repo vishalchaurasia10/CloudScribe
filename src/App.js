@@ -6,6 +6,7 @@ import Contact from './components/Contact';
 import NoteState from './context/notes/NoteState';
 import Footer from './components/Footer';
 import Notes from './components/Notes';
+import Create from './components/Create';
 
 function App() {
   return (
@@ -16,12 +17,12 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/addnote" />
-              <Route path="/notes" element={<Notes/>} />
+              <Route path="/addnote" element={<Create />} />
+              <Route path="/notes" element={<Notes />} />
               <Route path="/about" />
               {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>
-            <Contact/>
+            <Contact />
             <Footer />
           </div>
         </BrowserRouter>

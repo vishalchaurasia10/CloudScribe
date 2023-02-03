@@ -12,7 +12,6 @@ const Navbar = () => {
 
   let location = useLocation();
   useEffect(() => {
-    console.log(location)
   }, [location])
 
   const changeMode = () => {
@@ -44,17 +43,17 @@ const Navbar = () => {
             <ul className='flex justify-center  font-poppins text-lg items-center space-x-8'>
               <li className={`flex flex-col`}>
                 <Link to="/">Home</Link>
-                <span className={`bg-orange-400 ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+                <span className={`bg-black ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
               <li className={`flex flex-col`}>
                 <Link to="/notes">Notes</Link>
-                <span className={`bg-orange-400 ${location.pathname === '/notes' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+                <span className={`bg-black ${location.pathname === '/notes' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
               <li className={`flex flex-col`}><Link to="/addnote">Create Notes</Link>
-                <span className={`bg-orange-400 ${location.pathname === '/addnote' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+                <span className={`bg-black ${location.pathname === '/addnote' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
               <li className={`flex flex-col`}><Link to="/about">About Me</Link>
-                <span className={`bg-orange-400 ${location.pathname === '/about' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+                <span className={`bg-black ${location.pathname === '/about' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
             </ul>
           </div>
@@ -99,7 +98,7 @@ const Navbar = () => {
 
         </div>
       </nav>
-      <div className={`expanded lg:hidden transition-all duration-500 fixed h-screen z-30 w-full flex items-center justify-center backdrop-blur-lg ${expand ? '' : 'translate-x-[60rem]'}`}>
+      <div className={`expanded lg:hidden transition-all duration-500 fixed top-0 h-screen z-30 w-full flex items-center justify-center backdrop-blur-lg ${expand ? '' : 'translate-x-[60rem]'}`}>
         <div className="navItems">
           <ul className='flex flex-col space-y-3 justify-center font-poppins text-lg items-center'>
             <li className="logo font-bold text-2xl">Cloud Scribe</li>
@@ -116,10 +115,10 @@ const Navbar = () => {
             </li>
             <li className={`flex flex-col`}><Link to="/about">About Me</Link>
               <span className={`bg-orange-400 ${location.pathname === '/about' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
-              <li className='flex py-2 flex-col space-y-4'>
-                <Button title='Login' padding='1' />
-                <Button title='Sign Up' padding='1' />
-              </li>
+            </li>
+            <li className='flex py-2 flex-col space-y-4'>
+              <Button title='Login' position='auto' padding='1' />
+              <Button title='Sign Up' position='auto' padding='1' />
             </li>
           </ul>
         </div>

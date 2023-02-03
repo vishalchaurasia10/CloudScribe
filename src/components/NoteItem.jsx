@@ -1,11 +1,14 @@
-import { faFloppyDisk, faPen, faThumbTack, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faThumbTack, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import noteContext from '../context/notes/noteContext';
 
 const NoteItem = (props) => {
 
     const targetRef = useRef(null);
     const [isInView, setIsInView] = useState(false);
+    const context = useContext(noteContext)
+    const { deleteNote } = context
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -22,6 +25,7 @@ const NoteItem = (props) => {
 
         observer.observe(targetRef.current);
 
+        // eslint-disable-next-line
     }, [isInView]);
 
     function formatDateInIST(dateString) {
@@ -30,10 +34,9 @@ const NoteItem = (props) => {
         return date.toLocaleString('en-IN', options);
       }
       
-      
 
     return (
-        <div ref={targetRef} className={`noteItem overflow-hidden transition-all duration-500 ${isInView ? ' scale-100' : 'scale-0'} p-4 lg:w-[30%] m-4 border bg-[rgba(255,255,255,0.2)] border-[rgba(255,255,255,0.1)] shadow-2xl rounded-lg backdrop-blur-2xl`} key={props._id}>
+        <div ref={targetRef} className={`noteItem overflow-hidden transition-all duration-500 ${isInView ? ' scale-100' : 'scale-0'} p-4 lg:w-[30%] m-4 border bg-[rgba(255,255,255,0.2)] border-[rgba(255,255,255,0.1)] shadow-2xl rounded-lg backdrop-blur-2xl`} key={props.id}>
             <div className='px-3 pr-4 space-y-2 font-jost'>
                 <h2 className='text-4xl font-jost'>{props.title}</h2>
                 <ul className='list-disc flex space-x-6 text-xs font-light pl-4'>
@@ -44,10 +47,9 @@ const NoteItem = (props) => {
                 <p className=''></p>
             </div>
             <div className="edits h-full bg-[rgba(255,255,255,0.1)] translate-x-7 backdrop-blur-3xl flex flex-col space-y-4 p-2 transition-all duration-150 absolute top-0 right-0">
-                <FontAwesomeIcon icon={faThumbTack}/>
-                <FontAwesomeIcon icon={faPen}/>
-                <FontAwesomeIcon icon={faTrash}/>
-                <FontAwesomeIcon className='h-5' icon={faFloppyDisk}/>
+                <FontAwesomeIcon onClick={()=>{props.pinNote(props.id)}} className='cursor-pointer hover:scale-125 transition-all duration-300' icon={faThumbTack}/>
+                <FontAwesomeIcon onClick={()=>{props.updateNotes(props.id,props.title,props.tag,props.description)}} className='cursor-pointer hover:scale-125 transition-all duration-300' icon={faPen}/>
+                <FontAwesomeIcon onClick={()=>{deleteNote(props.id)}} className='cursor-pointer hover:scale-125 transition-all duration-300' icon={faTrash}/>
             </div>
         </div>
     )
