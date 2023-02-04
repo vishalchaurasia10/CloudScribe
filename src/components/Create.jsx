@@ -1,23 +1,37 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import noteContext from '../context/notes/noteContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-const Create = () => {
+const Create = (props) => {
     const context = useContext(noteContext)
+    let navigate = useNavigate()
     const { addNote } = context
-    const [note, setNote] = useState({title: '', description: '', tag: ''})
+    const [note, setNote] = useState({ title: '', description: '', tag: '' })
+
+    useEffect(() => {
+        if (localStorage.getItem('token') === null) {
+            navigate('/login')
+        }
+        // eslint-disable-next-line
+    }, [])
 
     const handleAddNote = (e) => {
-        addNote(note.title, note.description, note.tag)
-        setNote({title: '', description: '', tag: ''})
-        let inputs = document.getElementsByClassName('input')
-        Array.from(inputs).forEach((input) => {
-            input.value = ''
-        })
+        if (note.title.length < 3 || note.description.length < 5) {
+            props.showAlert("failure", "Title must be atleast 3 characters long and and description must be 5 characters long");
+        }
+        else {
+            props.showAlert("success", "Note added successfully");
+            addNote(note.title, note.description, note.tag)
+            setNote({ title: '', description: '', tag: '' })
+            let inputs = document.getElementsByClassName('input')
+            Array.from(inputs).forEach((input) => {
+                input.value = ''
+            })
+        }
     }
 
     const onChange = (e) => {
-        setNote({...note, [e.target.name]: e.target.value})
+        setNote({ ...note, [e.target.name]: e.target.value })
     }
 
     return (
@@ -26,8 +40,8 @@ const Create = () => {
                 <input onChange={onChange} className='input outline-none placeholder:text-white bg-transparent border-b p-2 border-[rgba(255,255,255,0.5)]' type="text" placeholder='Title' name="title" id="title" />
                 <input onChange={onChange} className='input outline-none placeholder:text-white bg-transparent border-b p-2 border-[rgba(255,255,255,0.5)]' type="text" placeholder='#tag' name="tag" id="tag" />
                 <textarea onChange={onChange} className='input outline-none placeholder:text-white bg-transparent border-b p-2 border-[rgba(255,255,255,0.5)]' name="description" placeholder='Start typing...' id="description" cols="30" rows="8"></textarea>
-                <Link to='/notes'>
-                <button onClick={handleAddNote} className={`text-left w-fit p-2 rounded-md transition-all duration-150 hover:shadow-lg hover:-translate-y-1 bg-[rgba(255,255,255,0.2)] border border-[rgba(255,255,255,0.1)]`}>Add note</button>
+                <Link to={(note.title.length > 3 || note.description.length > 5) ? '/notes' : ''}>
+                    <button onClick={handleAddNote} className={`text-left w-fit p-2 rounded-md transition-all duration-150 hover:shadow-lg hover:-translate-y-1 bg-[rgba(255,255,255,0.2)] border border-[rgba(255,255,255,0.1)]`}>Add note</button>
                 </Link>
             </div>
         </div>

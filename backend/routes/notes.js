@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.get('/getallnotes', fetchUser, async (req, res) => {
     try {
-        const notes = await Notes.find({ user: req.id })
+        const notes = await Notes.find({ user: req.id }).sort({ date: -1 });
         res.json(notes)
     }
     catch (err) {

@@ -68,8 +68,12 @@ const Navbar = () => {
               </div>
             </div>
             <div className="buttons space-x-4">
-              <Button title='Login' padding='2' />
-              <Button title='Sign Up' padding='2' />
+              <Link to='/login'>
+                <Button title='Login' padding='2' />
+              </Link>
+              <Link to='/signup'>
+                <Button title='Sign Up' padding='2' />
+              </Link>
             </div>
           </div>
         </div>
@@ -116,9 +120,13 @@ const Navbar = () => {
             <li className={`flex flex-col`}><Link to="/about">About Me</Link>
               <span className={`bg-orange-400 ${location.pathname === '/about' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
-            <li className='flex py-2 flex-col space-y-4'>
-              <Button title='Login' position='auto' padding='1' />
-              <Button title='Sign Up' position='auto' padding='1' />
+            <li className='flex py-2 text-center flex-col space-y-4'>
+              <Link to='/login'>
+                <Button title='Login' position='auto' padding='1' />
+              </Link>
+              <Link to='/signup'>
+                <Button title='Sign Up' position='auto' padding='1' />
+              </Link>
             </li>
           </ul>
         </div>

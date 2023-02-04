@@ -47,9 +47,9 @@ const NoteItem = (props) => {
                 <p className=''></p>
             </div>
             <div className="edits h-full bg-[rgba(255,255,255,0.1)] translate-x-7 backdrop-blur-3xl flex flex-col space-y-4 p-2 transition-all duration-150 absolute top-0 right-0">
-                <FontAwesomeIcon onClick={()=>{props.pinNote(props.id)}} className='cursor-pointer hover:scale-125 transition-all duration-300' icon={faThumbTack}/>
+                <FontAwesomeIcon onClick={()=>{props.pinNote(props.id)}} className={` cursor-pointer hover:scale-125 transition-all duration-300`} icon={faThumbTack}/>
                 <FontAwesomeIcon onClick={()=>{props.updateNotes(props.id,props.title,props.tag,props.description)}} className='cursor-pointer hover:scale-125 transition-all duration-300' icon={faPen}/>
-                <FontAwesomeIcon onClick={()=>{deleteNote(props.id)}} className='cursor-pointer hover:scale-125 transition-all duration-300' icon={faTrash}/>
+                <FontAwesomeIcon onClick={()=>{deleteNote(props.id);props.showAlert("success","Note deleted successfully");props.fetchAllNotes();}} className='cursor-pointer hover:scale-125 transition-all duration-300' icon={faTrash}/>
             </div>
         </div>
     )

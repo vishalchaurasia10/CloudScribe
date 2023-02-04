@@ -3,18 +3,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext, useEffect, useState } from 'react'
 import noteContext from '../context/notes/noteContext'
 import NoteItem from './NoteItem'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-const Notes = () => {
+const Notes = (props) => {
 
     const [edit, setEdit] = useState(false)
     const [note, setNote] = useState({title: '', description: '', tag: ''})
     const [Id, setId] = useState('')
+    const [pin, setPin] = useState(false)
     const context = useContext(noteContext)
-    const { notes, fetchAllNotes, editNote } = context
+    let navigate = useNavigate()
+    const { notes, fetchAllNotes, editNote, deleteNote, addNote } = context
 
     useEffect(() => {
-        fetchAllNotes()
+        if(localStorage.getItem('token')===null){
+            navigate('/login')
+        }
+        else
+        {
+            fetchAllNotes()
+        }
         // eslint-disable-next-line
     }, [])
 
@@ -31,6 +39,7 @@ const Notes = () => {
 
     const removeModal = () => {
         setEdit(false)
+        props.showAlert("success","Note updated successfully");
     }
 
     const handleUpdateNote = (e) => {
@@ -48,7 +57,15 @@ const Notes = () => {
         setNote({...note, [e.target.name]: e.target.value})
     }
 
-    const pinNote = (id) => {
+    const pinNote = async (id) => {
+        
+        if(pin) { setPin(false) }
+        else { setPin(true) }
+
+        const json = await deleteNote(id)
+        addNote(json.note.title, json.note.description, json.note.tag)
+        props.showAlert("success","Note pinned successfully");
+        fetchAllNotes()
     }
 
     return (
@@ -66,16 +83,17 @@ const Notes = () => {
                     </Link>
                 </div>
             </div>
-            <div className='notesContainer -mb-36 h-screen lg:px-32 bg-no-repeat bg-center bg-cover pt-28 bg-[url(/src/assets/addBackground.svg)] space-y-10'>
+            <div className={`notesContainer ${notes.length<9?'h-screen':''} lg:px-32 bg-no-repeat bg-center bg-cover pt-28 bg-[url(/src/assets/addBackground.svg)] space-y-10`}>
                 <h1 className='text-5xl -mt-8 lg:mt-0 m-4 font-extrabold font-jost'>Your Notes</h1>
-                <div className={`notes lg:flex flex-wrap`}>
+                {notes.length !== 0 ? <div className={`notes lg:flex flex-wrap`}>
                     {notes.map((note) => {
                         return (
-                            <NoteItem title={note.title} updateNotes={updateNotes} pinNote={pinNote} id={note._id} description={note.description} tag={note.tag} date={note.date} />
+                            <NoteItem showAlert={props.showAlert} title={note.title} fetchAllNotes={fetchAllNotes} updateNotes={updateNotes} pinNote={pinNote} id={note._id} description={note.description} tag={note.tag} date={note.date} />
                         )
                     }
                     )}
-                </div>
+                </div> : <div className='animate-scale bg-no-repeat h-96 lg:h-[32rem] lg:-mt-20 lg:w-[32rem] mx-auto lg:z-40 relative bg-center bg-cover bg-[url("/src/assets/nothing.svg")]'></div>
+                }
                 <Link to='/addnote'>
                     <FontAwesomeIcon className='w-12 z-40 h-12 hover:scale-105 transition-all duration-300 text-white fixed bottom-4 right-4 bg-[#E37B7B] rounded-full p-2' icon={faPlus} />
                 </Link>
