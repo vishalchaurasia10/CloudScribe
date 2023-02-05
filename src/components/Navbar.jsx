@@ -165,10 +165,10 @@ const Navbar = () => {
               <span className={`bg-orange-400 ${location.pathname === '/music' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
             {!localStorage.getItem('token') ? <div className="buttons space-x-4">
-              <Link to='/login'>
+              <Link onClick={()=>{setExpand(false)}} to='/login'>
                 <Button title='Login' padding='2' />
               </Link>
-              <Link to='/signup'>
+              <Link onClick={()=>{setExpand(false)}} to='/signup'>
                 <Button title='Sign Up' padding='2' />
               </Link>
             </div> :
