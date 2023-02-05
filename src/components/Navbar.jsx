@@ -1,7 +1,7 @@
 import { faMoon, faSearch, faSun } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
 import Button from './Button';
 
@@ -9,6 +9,7 @@ const Navbar = () => {
 
   const [mode, setMode] = useState('light');
   const [expand, setExpand] = useState(false);
+  let navigate = useNavigate()
 
   let location = useLocation();
   useEffect(() => {
@@ -28,6 +29,11 @@ const Navbar = () => {
     } else {
       setExpand(true)
     }
+  }
+
+  const userLogout = () => {
+    localStorage.removeItem('token')
+    navigate('/login')
   }
 
   return (
@@ -52,8 +58,8 @@ const Navbar = () => {
               <li className={`flex flex-col`}><Link to="/addnote">Create Notes</Link>
                 <span className={`bg-black ${location.pathname === '/addnote' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
-              <li className={`flex flex-col`}><Link to="/about">About Me</Link>
-                <span className={`bg-black ${location.pathname === '/about' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+              <li className={`flex flex-col`}><Link to="/music">Music</Link>
+                <span className={`bg-black ${location.pathname === '/music' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
             </ul>
           </div>
@@ -67,14 +73,14 @@ const Navbar = () => {
                 <FontAwesomeIcon className={` w-5 h-5 pl-[0.1rem] transition-all duration-500 text-blue-400`} id='sun' onClick={changeMode} icon={faSun} />
               </div>
             </div>
-            <div className="buttons space-x-4">
+            {!localStorage.getItem('token') ? <div className="buttons space-x-4">
               <Link to='/login'>
                 <Button title='Login' padding='2' />
               </Link>
               <Link to='/signup'>
                 <Button title='Sign Up' padding='2' />
               </Link>
-            </div>
+            </div> : <button onClick={userLogout} className={`text-left w-fit p-2 rounded-md transition-all duration-150 hover:shadow-lg hover:-translate-y-1 bg-[rgba(255,255,255,0.2)] border border-[rgba(255,255,255,0.1)]`}>Logout</button> }
           </div>
         </div>
 
@@ -117,8 +123,8 @@ const Navbar = () => {
             <li className={`flex flex-col`}><Link to="/addnote">Create Notes</Link>
               <span className={`bg-orange-400 ${location.pathname === '/addnote' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
-            <li className={`flex flex-col`}><Link to="/about">About Me</Link>
-              <span className={`bg-orange-400 ${location.pathname === '/about' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+            <li className={`flex flex-col`}><Link to="/music">Music</Link>
+              <span className={`bg-orange-400 ${location.pathname === '/music' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
             <li className='flex py-2 text-center flex-col space-y-4'>
               <Link to='/login'>

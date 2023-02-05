@@ -11,6 +11,7 @@ import { useState } from 'react';
 import Alert from './components/Alert';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Music from './components/Music';
 
 function App() {
   const [alert , setAlert] = useState(null)
@@ -35,7 +36,7 @@ function App() {
               <Route path="/notes" element={<Notes showAlert={showAlert} />} />
               <Route path="/login" element={<Login showAlert={showAlert} />} />
               <Route path="/signup" element={<Signup showAlert={showAlert} />} />
-              <Route path="/about" />
+              <Route path="/music" element={<Music/>} />
               {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>
             <Contact />
