@@ -35,6 +35,7 @@ const Login = (props) => {
 
         if (json.success) {
             localStorage.setItem('token', json.authToken);
+            localStorage.setItem('name', json.name);
             navigate("/");
             props.showAlert("success","Logged in successfully")
         }
@@ -82,7 +83,7 @@ const Login = (props) => {
                                 </div>
                                 <div className='flex remember space-x-2 text-sm pl-2 mt-5 justify-between'>
                                     <div className="rememberMe flex items-center">
-                                        <input onClick={changeRemember} className="h-5 w-8 appearance-none bg-transparent bg-green-400 border border-[rgba(255,255,255,0.1)] rounded-full" type="checkbox" name="remember" id="remember" title="Remember me" />
+                                        <input onClick={changeRemember} className="h-5 w-8 appearance-none bg-green-400 border border-[rgba(255,255,255,0.1)] rounded-full" type="checkbox" name="remember" id="remember" title="Remember me" />
                                         <div onClick={changeRemember} className={`switch transition-all duration-300 relative ${remember === 0 ? '-left-[1.9rem]' : '-left-[1.1rem]'} border border-gray-300 bg-white h-[1rem] w-[1rem] rounded-full`} id=""></div>
                                         <label className='-ml-2' htmlFor="remember">Remember me</label>
                                     </div>
