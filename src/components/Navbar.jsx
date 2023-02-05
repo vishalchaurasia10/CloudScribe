@@ -149,19 +149,19 @@ const Navbar = () => {
         <div className="navItems">
           <ul className='flex flex-col space-y-3 justify-center font-poppins text-lg items-center'>
             <li className="logo font-bold text-2xl">
-              <Link to='/'>Cloud Scribe</Link></li>
+              <Link onClick={()=>{setExpand(false)}} to='/'>Cloud Scribe</Link></li>
             <li className={`flex flex-col`}>
-              <Link to="/">Home</Link>
-              <span className={`bg-orange-400 ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+              <Link onClick={()=>{setExpand(false)}} to="/">Home</Link>
+              <span onClick={()=>{setExpand(false)}} className={`bg-orange-400 ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
             <li className={`flex flex-col`}>
-              <Link to="/notes">Notes</Link>
+              <Link onClick={()=>{setExpand(false)}} to="/notes">Notes</Link>
               <span className={`bg-orange-400 ${location.pathname === '/notes' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
-            <li className={`flex flex-col`}><Link to="/addnote">Create Notes</Link>
+            <li className={`flex flex-col`}><Link onClick={()=>{setExpand(false)}} to="/addnote">Create Notes</Link>
               <span className={`bg-orange-400 ${location.pathname === '/addnote' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
-            <li className={`flex flex-col`}><Link to="/music">Music</Link>
+            <li className={`flex flex-col`}><Link onClick={()=>{setExpand(false)}} to="/music">Music</Link>
               <span className={`bg-orange-400 ${location.pathname === '/music' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
             {!localStorage.getItem('token') ? <div className="buttons space-x-4">
