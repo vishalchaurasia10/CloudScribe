@@ -30,7 +30,7 @@ const Hero = (props) => {
   }, []);
 
   return (
-    <div ref={imageRef} className={`${isImageInView ? 'translate-x-[]' : 'translate-x-0'} transition-all duration-1000 h-screen w-full ${props.position==='left'?'lg:pr-8':'lg:pl-16'} space-y-2 lg:space-y-0 lg:pt-16 pt-12 bg-${props.color} lg:flex lg:flex-row flex-col items-center justify-center`}>
+    <div ref={imageRef} className={`${isImageInView ? 'translate-x-[]' : 'translate-x-0'} transition-all duration-1000 h-screen w-full ${props.position==='left'?'lg:pr-8':'lg:pl-16'} space-y-2 lg:space-y-0 lg:pt-16 pt-12 ${props.position==='left'?'bg-yellow-400':'bg-green-300'} lg:flex lg:flex-row flex-col items-center justify-center`}>
       <img
         ref={imageRef}
         className={`${isImageInView ? 'scale-100' : 'scale-0'} lg:w-1/2  ${props.position === 'left' ? 'order-2' : 'order-2'} transition-all duration-1000 lg:h-full lg:p-12`}
