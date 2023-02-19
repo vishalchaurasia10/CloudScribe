@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import noteContext from '../context/notes/noteContext'
+import modeContext from '../context/modes/modeContext'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Create = (props) => {
     const context = useContext(noteContext)
+    const mode = useContext(modeContext)
+    const { darkMode } = mode
     let navigate = useNavigate()
     const { addNote } = context
     const [note, setNote] = useState({ title: '', description: '', tag: '' })
@@ -35,7 +38,7 @@ const Create = (props) => {
     }
 
     return (
-        <div className='h-screen -mb-36 lg:px-36 pt-24 lg:pt-36 bg-cover bg-center bg-[url("/src/assets/addBackground.svg")]'>
+        <div className={`h-screen ${darkMode?'bg-[#212E35]':''} transition-all duration-300 lg:mb-0 -mb-36 lg:px-36 pt-24 lg:pt-36 bg-cover bg-center bg-[url("/src/assets/addBackground.svg")]`}>
             <div className='createNote bg-[rgba(255,255,255,0.1)] text-white bg-[url("/src/assets/notesBackground.svg)] bg-no-repeat bg-cover bg-center flex flex-col mx-4 lg:mx-16 rounded-xl space-y-8 p-8 backdrop-blur-2xl shadow-2xl border-[rgba(255,255,255,0.1)]'>
                 <input onChange={onChange} className='input outline-none placeholder:text-white bg-transparent border-b p-2 border-[rgba(255,255,255,0.5)]' type="text" placeholder='Title' name="title" id="title" />
                 <input onChange={onChange} className='input outline-none placeholder:text-white bg-transparent border-b p-2 border-[rgba(255,255,255,0.5)]' type="text" placeholder='#tag' name="tag" id="tag" />

@@ -1,14 +1,17 @@
 import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import footer from '../assets/footer.svg'
+import modeContext from '../context/modes/modeContext'
 
 const Footer = () => {
+  const context = useContext(modeContext);
+  const { darkMode } = context;
   return (
     <>
-      <div className="footer">
-        <div className="image mt-4 lg:mt-0">
+      <div className={`${darkMode?'bg-[#212E35]':''} transition-all duration-300 footer`}>
+        <div className="image pt-4 lg:mt-0">
           <img className='w-full' src={footer} alt="footer" />
         </div>
 

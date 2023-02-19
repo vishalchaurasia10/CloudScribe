@@ -1,15 +1,18 @@
 import { faMoon, faSearch, faSun, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
 import Button from './Button';
+import modeContext from '../context/modes/modeContext';
 
 const Navbar = () => {
 
   const [mode, setMode] = useState('light');
   const [expand, setExpand] = useState(false);
   const [username, setUsername] = useState(false);
+  const context = useContext(modeContext);
+  const { darkMode, setDarkMode } = context;
   let navigate = useNavigate()
 
   let location = useLocation();
@@ -20,8 +23,10 @@ const Navbar = () => {
   const changeMode = () => {
     if (mode === 'light') {
       setMode('dark')
+      setDarkMode(true)
     } else {
       setMode('light')
+      setDarkMode(false)
     }
   }
 
@@ -52,7 +57,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className=' fixed top-0 shadow-2xl w-full z-50'>
+      <nav className={`${darkMode?'text-white':''} transition-all duration-300 fixed top-0 shadow-2xl w-full z-50`}>
         <div className="navWrapperLargeScreen p-2 bg-[rgba(255,255,255,0.2)] backdrop-blur-2xl hidden lg:flex justify-between items-center px-8">
 
           <div className="left">
@@ -62,20 +67,20 @@ const Navbar = () => {
           </div>
 
           <div className="center">
-            <ul className='flex justify-center  font-poppins text-lg items-center space-x-8'>
+            <ul className='flex justify-center font-poppins text-lg items-center space-x-8'>
               <li className={`flex flex-col`}>
                 <Link to="/">Home</Link>
-                <span className={`bg-black ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+                <span className={`${darkMode?'bg-white':'bg-black'} ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
               <li className={`flex flex-col`}>
                 <Link to="/notes">Notes</Link>
-                <span className={`bg-black ${location.pathname === '/notes' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+                <span className={`${darkMode?'bg-white':'bg-black'} ${location.pathname === '/notes' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
               <li className={`flex flex-col`}><Link to="/addnote">Create Notes</Link>
-                <span className={`bg-black ${location.pathname === '/addnote' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+                <span className={`${darkMode?'bg-white':'bg-black'} ${location.pathname === '/addnote' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
               <li className={`flex flex-col`}><Link to="/music">Music</Link>
-                <span className={`bg-black ${location.pathname === '/music' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+                <span className={`${darkMode?'bg-white':'bg-black'} ${location.pathname === '/music' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
             </ul>
           </div>
@@ -85,8 +90,8 @@ const Navbar = () => {
           <div className="right flex items-center space-x-4">
             <div className="mode flex flex-col h-6 overflow-hidden">
               <div className={`flex flex-col transition-all duration-500 ${mode === 'light' ? '' : '-translate-y-9'}  space-y-4`}>
-                <FontAwesomeIcon className={`w-5 h-5 text-blue-400`} id='moon' onClick={changeMode} icon={faMoon} />
-                <FontAwesomeIcon className={` w-5 h-5 pl-[0.1rem] transition-all duration-500 text-orange-400`} id='sun' onClick={changeMode} icon={faSun} />
+                <FontAwesomeIcon className={`w-5 h-5 cursor-pointer text-blue-400`} id='moon' onClick={changeMode} icon={faMoon} />
+                <FontAwesomeIcon className={` w-5 h-5 pl-[0.1rem] cursor-pointer transition-all duration-500 text-orange-400`} id='sun' onClick={changeMode} icon={faSun} />
               </div>
             </div>
             {!localStorage.getItem('token') ? <div className="buttons space-x-4">
@@ -99,7 +104,7 @@ const Navbar = () => {
             </div> :
               <div className='flex items-center space-x-3'>
                 <div>
-                  <FontAwesomeIcon onClick={showUsername} className='text-2xl text-blue-400' icon={faUserCircle} />
+                  <FontAwesomeIcon onClick={showUsername} className='text-2xl cursor-pointer text-blue-400' icon={faUserCircle} />
                 </div>
                 <div className={`username ${username ? 'scale-100' : 'scale-0'} transition-all duration-300 absolute top-16 right-[6rem] bg-white p-2 rounded-lg`}>
                   {localStorage.getItem('name').split(" ")[0]}
@@ -117,7 +122,7 @@ const Navbar = () => {
           </div>
 
           <div className="right flex items-center space-x-2">
-            <FontAwesomeIcon className='text-black' icon={faSearch} />
+            <FontAwesomeIcon className='text-black cursor-pointer' icon={faSearch} />
 
             <div className="mode flex flex-col h-5 overflow-hidden">
               <div className={`flex flex-col transition-all duration-500 ${mode === 'light' ? '' : '-translate-y-[2.15rem]'}  space-y-4`}>
@@ -128,7 +133,7 @@ const Navbar = () => {
             {!localStorage.getItem('token') ? '' :
               <div>
                 <div className='flex items-center'>
-                  <FontAwesomeIcon onClick={showUsername} className='w-5 h-5 text-blue-400' icon={faUserCircle} />
+                  <FontAwesomeIcon onClick={showUsername} className='w-5 h-5 cursor-pointer text-blue-400' icon={faUserCircle} />
                 </div>
                 <div className={`username ${username ? 'scale-100' : 'scale-0'} transition-all duration-300 absolute top-14 right-4 bg-white p-2 rounded-lg`}>
                   {localStorage.getItem('name').split(" ")[0]}
@@ -145,7 +150,7 @@ const Navbar = () => {
 
         </div>
       </nav>
-      <div className={`expanded lg:hidden transition-all duration-500 fixed top-0 h-screen z-30 w-full flex items-center justify-center backdrop-blur-lg ${expand ? '' : 'translate-x-[60rem]'}`}>
+      <div className={`expanded lg:hidden transition-all duration-500 fixed top-0 h-screen z-30 w-full flex items-center justify-center backdrop-blur-lg ${darkMode?'text-white':''} ${expand ? '' : 'translate-x-[60rem]'}`}>
         <div className="navItems">
           <ul className='flex flex-col space-y-3 justify-center font-poppins text-lg items-center'>
             <li className="logo font-bold text-2xl">

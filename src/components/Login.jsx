@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
+import modeContext from '../context/modes/modeContext';
 
 const Login = (props) => {
     const [remember, setRemember] = useState(0);
+    const context = useContext(modeContext);
+    const { darkMode } = context;
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState({ email: "", password: "" });
 
@@ -46,12 +49,12 @@ const Login = (props) => {
 
     return (
         <>
-            <div className="mainBlock bg-cover bg-center bg-no-repeat bg-[url('/src/assets/loginBackground.svg')] flex flex-col lg:flex-row justify-center items-center">
+            <div className={`${darkMode?'bg-[#212E35]':''} transition-all duration-300 mainBlock bg-cover bg-center bg-no-repeat bg-[url('/src/assets/loginBackground.svg')] flex flex-col lg:flex-row justify-center items-center`}>
 
                 {/* 1st container starts here */}
 
                 <div className="container1 lg:order-2 space-y-0 flex flex-col justify-center items-center lg:h-screen lg:w-1/2">
-                    <div className='text-lg lg:px-32 animate-scale text-[#392E33] p-4 tracking-wide pt-24 pb-8 lg:pb-1 text-center lg:pt-28 font-jost font-extrabold'>
+                    <div className={`${darkMode?'text-white':'text-[#392E33]'} text-lg lg:px-32 animate-scale p-4 tracking-wide pt-24 pb-8 lg:pb-1 text-center lg:pt-28 font-jost font-extrabold`}>
                         <span className='font-jost text-3xl font-extrabold '>Welcome! </span>
                         back! We're glad you're here.
                         <span className='font-jost text-3xl font-extrabold'> Login </span>

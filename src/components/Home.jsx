@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Hero from './Hero'
+import modeContext from '../context/modes/modeContext'
 
 const Home = () => {
+  const context = useContext(modeContext);
+  const { darkMode } = context;
   return (
     <div>
       <div className="hero overflow-hidden">
-        <Hero color='yellow-400' position='left' />
-        <Hero color='green-300' position='right' />
+        <Hero color={`${darkMode?'bg-[#212E35]':'bg-yellow-400'}`} darkMode={darkMode} position='left' />
+        <Hero color={`${darkMode?'bg-[#5A6064]':'bg-green-400'}`} darkMode={darkMode} position='right' />
       </div>
     </div>
   )

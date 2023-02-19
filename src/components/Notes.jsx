@@ -2,6 +2,7 @@ import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext, useEffect, useState } from 'react'
 import noteContext from '../context/notes/noteContext'
+import modeContext from '../context/modes/modeContext'
 import NoteItem from './NoteItem'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -12,6 +13,8 @@ const Notes = (props) => {
     const [Id, setId] = useState('')
     const [pin, setPin] = useState(false)
     const context = useContext(noteContext)
+    const mode = useContext(modeContext)
+    const { darkMode } = mode
     let navigate = useNavigate()
     const { notes, fetchAllNotes, editNote, deleteNote, addNote } = context
 
@@ -83,7 +86,7 @@ const Notes = (props) => {
                     </Link>
                 </div>
             </div>
-            <div className={`notesContainer ${notes.length<9?'h-screen':''} lg:px-32 bg-no-repeat bg-center bg-cover pt-28 bg-[url(/src/assets/addBackground.svg)] space-y-10`}>
+            <div className={`notesContainer transition-all duration-300 ${darkMode?'bg-[#212E35]':''} ${notes.length<9?'h-screen':''} lg:px-32 bg-no-repeat bg-center bg-cover pt-28 bg-[url(/src/assets/addBackground.svg)] space-y-10`}>
                 <h1 className='text-5xl -mt-8 lg:mt-0 m-4 font-extrabold font-jost'>Your Notes</h1>
                 {notes.length !== 0 ? <div className={`notes lg:flex flex-wrap`}>
                     {notes.map((note) => {

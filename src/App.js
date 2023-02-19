@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Contact from './components/Contact';
 import NoteState from './context/notes/NoteState';
+import ModeState from './context/modes/ModeState';
 import Footer from './components/Footer';
 import Notes from './components/Notes';
 import Create from './components/Create';
@@ -26,6 +27,7 @@ function App() {
   }
   return (
     <div>
+      <ModeState>
       <NoteState>
         <BrowserRouter>
             <Navbar />
@@ -43,6 +45,7 @@ function App() {
             <Footer />
         </BrowserRouter>
       </NoteState>
+      </ModeState>
     </div>
   );
 }
