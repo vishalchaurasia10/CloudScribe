@@ -5,6 +5,7 @@ import noteContext from '../context/notes/noteContext'
 import modeContext from '../context/modes/modeContext'
 import NoteItem from './NoteItem'
 import { Link, useNavigate } from 'react-router-dom'
+import AddShortcut from './AddShortcut'
 
 const Notes = (props) => {
 
@@ -97,9 +98,7 @@ const Notes = (props) => {
                     )}
                 </div> : <div className='animate-scale bg-no-repeat h-96 lg:h-[32rem] lg:-mt-20 lg:w-[32rem] mx-auto lg:z-40 relative bg-center bg-cover bg-[url("/src/assets/nothing.svg")]'></div>
                 }
-                <Link to='/addnote'>
-                    <FontAwesomeIcon className='w-12 z-40 h-12 hover:scale-105 transition-all duration-300 text-white fixed bottom-4 right-4 bg-[#E37B7B] rounded-full p-2' icon={faPlus} />
-                </Link>
+                <AddShortcut/>
             </div>
         </>
     )

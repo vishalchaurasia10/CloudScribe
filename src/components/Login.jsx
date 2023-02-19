@@ -44,7 +44,8 @@ const Login = (props) => {
             props.showAlert("success","Logged in successfully")
         }
         else {
-            props.showAlert("failure","Invalid credentials")
+            if(credentials.password.length<8){ props.showAlert("failure","Password must be atleast 8 characters long") }
+            else{props.showAlert("failure","Invalid credentials")}
         }
     }
 

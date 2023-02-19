@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import Button from './Button';
 import modeContext from '../context/modes/modeContext';
 
-const Navbar = () => {
+const Navbar = (props) => {
 
   const [mode, setMode] = useState('light');
   const [expand, setExpand] = useState(false);
@@ -24,9 +24,11 @@ const Navbar = () => {
     if (mode === 'light') {
       setMode('dark')
       setDarkMode(true)
+      props.showAlert('success', 'Dark mode has been enabled.')
     } else {
       setMode('light')
       setDarkMode(false)
+      props.showAlert('success', 'Light mode has been enabled.')
     }
   }
 
@@ -51,13 +53,17 @@ const Navbar = () => {
     }, 3000);
   }
 
+  const performSearch = () => {
+    props.showAlert('failure', 'Search feature is not available yet!.')
+  }
+
   window.addEventListener('locationchange', function () {
     console.log('location changed!');
-});
+  });
 
   return (
     <>
-      <nav className={`${darkMode?'text-white':''} transition-all duration-300 fixed top-0 shadow-2xl w-full z-50`}>
+      <nav className={`${darkMode ? 'text-white' : ''} transition-all duration-300 fixed top-0 shadow-2xl w-full z-50`}>
         <div className="navWrapperLargeScreen p-2 bg-[rgba(255,255,255,0.2)] backdrop-blur-2xl hidden lg:flex justify-between items-center px-8">
 
           <div className="left">
@@ -70,17 +76,21 @@ const Navbar = () => {
             <ul className='flex justify-center font-poppins text-lg items-center space-x-8'>
               <li className={`flex flex-col`}>
                 <Link to="/">Home</Link>
-                <span className={`${darkMode?'bg-white':'bg-black'} ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+                <span className={`${darkMode ? 'bg-white' : 'bg-black'} ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
               <li className={`flex flex-col`}>
                 <Link to="/notes">Notes</Link>
-                <span className={`${darkMode?'bg-white':'bg-black'} ${location.pathname === '/notes' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+                <span className={`${darkMode ? 'bg-white' : 'bg-black'} ${location.pathname === '/notes' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
               <li className={`flex flex-col`}><Link to="/addnote">Create Notes</Link>
-                <span className={`${darkMode?'bg-white':'bg-black'} ${location.pathname === '/addnote' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+                <span className={`${darkMode ? 'bg-white' : 'bg-black'} ${location.pathname === '/addnote' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
-              <li className={`flex flex-col`}><Link to="/music">Music</Link>
-                <span className={`${darkMode?'bg-white':'bg-black'} ${location.pathname === '/music' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+              <li className={`flex flex-col`}>
+                <Link className='flex justify-center items-center' to="/music">
+                  Music
+                  <FontAwesomeIcon onClick={performSearch} className='text-blue-400 mx-1 w-5 h-5 cursor-pointer' icon={faSearch} />
+                  </Link>
+                <span className={`${darkMode ? 'bg-white' : 'bg-black'} ${location.pathname === '/music' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
             </ul>
           </div>
@@ -88,6 +98,7 @@ const Navbar = () => {
 
 
           <div className="right flex items-center space-x-4">
+            
             <div className="mode flex flex-col h-6 overflow-hidden">
               <div className={`flex flex-col transition-all duration-500 ${mode === 'light' ? '' : '-translate-y-9'}  space-y-4`}>
                 <FontAwesomeIcon className={`w-5 h-5 cursor-pointer text-blue-400`} id='moon' onClick={changeMode} icon={faMoon} />
@@ -123,7 +134,7 @@ const Navbar = () => {
           </div>
 
           <div className="right flex items-center space-x-2">
-            <FontAwesomeIcon className='text-black cursor-pointer' icon={faSearch} />
+            <FontAwesomeIcon onClick={performSearch} className='text-blue-400 cursor-pointer' icon={faSearch} />
 
             <div className="mode flex flex-col h-5 overflow-hidden">
               <div className={`flex flex-col transition-all duration-500 ${mode === 'light' ? '' : '-translate-y-[2.15rem]'}  space-y-4`}>
@@ -137,7 +148,7 @@ const Navbar = () => {
                   <FontAwesomeIcon onClick={showUsername} className='w-5 h-5 cursor-pointer text-blue-400' icon={faUserCircle} />
                 </div>
                 <div className={`username ${username ? 'scale-100' : 'scale-0'} flex flex-col font-jost transition-all duration-300 absolute top-14 right-4 text-black bg-white p-2 rounded-lg`}>
-                <p><span className='font-jost font-bold'>name : </span>{localStorage.getItem('name')}</p>
+                  <p><span className='font-jost font-bold'>name : </span>{localStorage.getItem('name')}</p>
                   <p><span className='font-jost font-bold'>email : </span>{localStorage.getItem('email')}</p>
                 </div>
               </div>
@@ -152,30 +163,30 @@ const Navbar = () => {
 
         </div>
       </nav>
-      <div className={`expanded lg:hidden transition-all duration-500 fixed top-0 h-screen z-30 w-full flex items-center justify-center backdrop-blur-lg ${darkMode?'text-white':''} ${expand ? '' : 'translate-x-[60rem]'}`}>
+      <div className={`expanded lg:hidden transition-all duration-500 fixed top-0 h-screen z-30 w-full flex items-center justify-center backdrop-blur-3xl ${darkMode ? 'text-white' : ''} ${expand ? '' : 'translate-x-[60rem]'}`}>
         <div className="navItems">
           <ul className='flex flex-col space-y-3 justify-center font-poppins text-lg items-center'>
             <li className="logo font-jost font-bold text-2xl">
-              <Link onClick={()=>{setExpand(false)}} to='/'>Cloud Scribe</Link></li>
+              <Link onClick={() => { setExpand(false) }} to='/'>Cloud Scribe</Link></li>
             <li className={`flex flex-col`}>
-              <Link onClick={()=>{setExpand(false)}} to="/">Home</Link>
-              <span onClick={()=>{setExpand(false)}} className={`bg-orange-400 ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+              <Link onClick={() => { setExpand(false) }} to="/">Home</Link>
+              <span onClick={() => { setExpand(false) }} className={`bg-orange-400 ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
             <li className={`flex flex-col`}>
-              <Link onClick={()=>{setExpand(false)}} to="/notes">Notes</Link>
+              <Link onClick={() => { setExpand(false) }} to="/notes">Notes</Link>
               <span className={`bg-orange-400 ${location.pathname === '/notes' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
-            <li className={`flex flex-col`}><Link onClick={()=>{setExpand(false)}} to="/addnote">Create Notes</Link>
+            <li className={`flex flex-col`}><Link onClick={() => { setExpand(false) }} to="/addnote">Create Notes</Link>
               <span className={`bg-orange-400 ${location.pathname === '/addnote' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
-            <li className={`flex flex-col`}><Link onClick={()=>{setExpand(false)}} to="/music">Music</Link>
+            <li className={`flex flex-col`}><Link onClick={() => { setExpand(false) }} to="/music">Music</Link>
               <span className={`bg-orange-400 ${location.pathname === '/music' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
             {!localStorage.getItem('token') ? <div className="buttons space-x-4">
-              <Link onClick={()=>{setExpand(false)}} to='/login'>
+              <Link onClick={() => { setExpand(false) }} to='/login'>
                 <Button title='Login' padding='2' />
               </Link>
-              <Link onClick={()=>{setExpand(false)}} to='/signup'>
+              <Link onClick={() => { setExpand(false) }} to='/signup'>
                 <Button title='Sign Up' padding='2' />
               </Link>
             </div> :
