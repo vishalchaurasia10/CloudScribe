@@ -106,8 +106,9 @@ const Navbar = () => {
                 <div>
                   <FontAwesomeIcon onClick={showUsername} className='text-2xl cursor-pointer text-blue-400' icon={faUserCircle} />
                 </div>
-                <div className={`username ${username ? 'scale-100' : 'scale-0'} transition-all duration-300 absolute top-16 right-[6rem] bg-white p-2 rounded-lg`}>
-                  {localStorage.getItem('name').split(" ")[0]}
+                <div className={`username ${username ? 'scale-100' : 'scale-0'} flex flex-col transition-all duration-300 absolute top-16 right-[6rem] font-jost text-black bg-white p-2 rounded-lg`}>
+                  <p><span className='font-jost font-bold'>name : </span>{localStorage.getItem('name')}</p>
+                  <p><span className='font-jost font-bold'>email : </span>{localStorage.getItem('email')}</p>
                 </div>
                 <button onClick={userLogout} className={`text-left w-fit p-2 rounded-md transition-all duration-150 hover:shadow-lg hover:-translate-y-1 bg-[rgba(255,255,255,0.2)] border border-[rgba(255,255,255,0.1)]`}>Logout</button>
               </div>}
@@ -117,7 +118,7 @@ const Navbar = () => {
         <div className="navwrapperSmallScreen bg-[rgba(255,255,255,0.2)] backdrop-blur-2xl flex lg:hidden p-2 justify-between items-center">
           <div className="left">
             <Link to='/'>
-              <h1 className='logo font-bold text-2xl' >Cloud Scribe</h1>
+              <h1 className='logo font-jost font-bold text-2xl' >Cloud Scribe</h1>
             </Link>
           </div>
 
@@ -135,8 +136,9 @@ const Navbar = () => {
                 <div className='flex items-center'>
                   <FontAwesomeIcon onClick={showUsername} className='w-5 h-5 cursor-pointer text-blue-400' icon={faUserCircle} />
                 </div>
-                <div className={`username ${username ? 'scale-100' : 'scale-0'} transition-all duration-300 absolute top-14 right-4 bg-white p-2 rounded-lg`}>
-                  {localStorage.getItem('name').split(" ")[0]}
+                <div className={`username ${username ? 'scale-100' : 'scale-0'} flex flex-col font-jost transition-all duration-300 absolute top-14 right-4 text-black bg-white p-2 rounded-lg`}>
+                <p><span className='font-jost font-bold'>name : </span>{localStorage.getItem('name')}</p>
+                  <p><span className='font-jost font-bold'>email : </span>{localStorage.getItem('email')}</p>
                 </div>
               </div>
             }
@@ -153,7 +155,7 @@ const Navbar = () => {
       <div className={`expanded lg:hidden transition-all duration-500 fixed top-0 h-screen z-30 w-full flex items-center justify-center backdrop-blur-lg ${darkMode?'text-white':''} ${expand ? '' : 'translate-x-[60rem]'}`}>
         <div className="navItems">
           <ul className='flex flex-col space-y-3 justify-center font-poppins text-lg items-center'>
-            <li className="logo font-bold text-2xl">
+            <li className="logo font-jost font-bold text-2xl">
               <Link onClick={()=>{setExpand(false)}} to='/'>Cloud Scribe</Link></li>
             <li className={`flex flex-col`}>
               <Link onClick={()=>{setExpand(false)}} to="/">Home</Link>

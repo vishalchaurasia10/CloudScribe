@@ -34,7 +34,7 @@ const Contact = () => {
     <div className={`wrapper ${darkMode?'bg-[#212E35] text-white':''} py-10 transition-all duration-300 `}>
       <div ref={targetRef} className={`contact ${isInView ? ' scale-100' : 'scale-0'} relative transition-all duration-1000  backdrop-blur-lg lg:top-24 top-10 lg:flex border border-[rgba(255,255,255,0.1)] ${darkMode?'shadow-white shadow-sm':'shadow-2xl'} rounded-2xl m-1 lg:p-8 lg:mx-32`}>
         <div className="details space-y-8 p-6 lg:w-1/2">
-          <h1 className='text-6xl font-jost font-bold'>We believe there's a better way to Scale your Business.</h1>
+          <h1 className='lg:text-6xl text-5xl font-jost font-bold'>We believe there's a better way to Scale your Business.</h1>
           <p className={`text-xl font-medium ${darkMode?'text-white':'text-[#392E33]'} `}>Thank you for visiting our website! If you have any questions, concerns, or feedback, please don't hesitate to reach out to us. Our team is dedicated to providing excellent customer service and support.</p>
           <button className={`bg-orange-400 p-3 rounded-sm transition-all duration-300 hover:-translate-y-1`}>Get Started!</button>
         </div>
