@@ -102,7 +102,7 @@ const Navbar = (props) => {
             <div className="mode flex flex-col h-6 overflow-hidden">
               <div className={`flex flex-col transition-all duration-500 ${mode === 'light' ? '' : '-translate-y-9'}  space-y-4`}>
                 <FontAwesomeIcon className={`w-5 h-5 cursor-pointer text-blue-400`} id='moon' onClick={changeMode} icon={faMoon} />
-                <FontAwesomeIcon className={` w-5 h-5 pl-[0.1rem] cursor-pointer transition-all duration-500 text-orange-400`} id='sun' onClick={changeMode} icon={faSun} />
+                <FontAwesomeIcon className={` w-5 h-5 pl-[0.1rem] cursor-pointer transition-all duration-500 text-blue-400`} id='sun' onClick={changeMode} icon={faSun} />
               </div>
             </div>
             {!localStorage.getItem('token') ? <div className="buttons space-x-4">
@@ -139,7 +139,7 @@ const Navbar = (props) => {
             <div className="mode flex flex-col h-5 overflow-hidden">
               <div className={`flex flex-col transition-all duration-500 ${mode === 'light' ? '' : '-translate-y-[2.15rem]'}  space-y-4`}>
                 <FontAwesomeIcon className={`w-5 h-5 text-blue-400`} id='moon' onClick={changeMode} icon={faMoon} />
-                <FontAwesomeIcon className={` w-4 h-4 pl-[0.1rem] transition-all duration-500 text-orange-400`} id='sun' onClick={changeMode} icon={faSun} />
+                <FontAwesomeIcon className={` w-4 h-4 pl-[0.1rem] transition-all duration-500 text-blue-400`} id='sun' onClick={changeMode} icon={faSun} />
               </div>
             </div>
             {!localStorage.getItem('token') ? '' :
@@ -170,7 +170,7 @@ const Navbar = (props) => {
               <Link onClick={() => { setExpand(false) }} to='/'>Cloud Scribe</Link></li>
             <li className={`flex flex-col`}>
               <Link onClick={() => { setExpand(false) }} to="/">Home</Link>
-              <span onClick={() => { setExpand(false) }} className={`bg-orange-400 ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+              <span onClick={() => { setExpand(false) }} className={`bg-blue-400 ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
             <li className={`flex flex-col`}>
               <Link onClick={() => { setExpand(false) }} to="/notes">Notes</Link>
