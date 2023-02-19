@@ -1,4 +1,4 @@
-import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext, useEffect, useState } from 'react'
 import noteContext from '../context/notes/noteContext'

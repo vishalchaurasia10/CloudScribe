@@ -44,12 +44,14 @@ const Contact = () => {
               <span className='relative text-white text-6xl font-bold'>Project</span>
             </span>
           </h1>
-          <form className='flex pt-8 pb-5 space-y-6 flex-col' action="">
+          <form className='flex pt-8 pb-5 space-y-6 flex-col' action="https://formsubmit.co/vishalvc1003@gmail.com" method='post'>
             <input className={`outline-none ${darkMode?'bg-[#212E35]':''} transition-all duration-300 border-slate-400 drop-shadow-sm border-2 rounded-xl p-4`} type="text" placeholder='Enter Full Name*' required name="clientname" id="clientname" />
             <input className={`outline-none ${darkMode?'bg-[#212E35]':''} transition-all duration-300 border-slate-400 drop-shadow-sm border-2 rounded-xl p-4`} type="email" placeholder='Enter Email Address' name="email" id="email" />
-            <textarea className={`${darkMode?'bg-[#212E35]':''} transition-all duration-300 outline-none border-slate-400 drop-shadow-sm border-2 rounded-xl p-4' name="" id="" placeholder='Tell Us Something About Your Project`} cols="30" rows="4"></textarea>
+            <textarea className={`${darkMode?'bg-[#212E35]':''} transition-all duration-300 outline-none border-slate-400 drop-shadow-sm border-2 rounded-xl p-4`} name="message" id="" placeholder='Tell Us Something About Your Project' cols="30" rows="4"></textarea>
+          <input type='submit' value='Contact Us' className={`bg-orange-400 p-3 w-fit rounded-sm transition-all duration-300 hover:-translate-y-1`}/>
+          <input type="hidden" name="_next" value="https://cloud-scribe-vishalchaurasia10.vercel.app/"/>
+          <input type="hidden" name="_captcha" value="false"></input>
           </form>
-          <button className={`bg-orange-400 p-3 rounded-sm transition-all duration-300 hover:-translate-y-1`}>Contact Me</button>
         </div>
       </div>
     </div>
