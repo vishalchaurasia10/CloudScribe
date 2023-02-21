@@ -170,7 +170,7 @@ const Navbar = (props) => {
               <Link onClick={() => { setExpand(false) }} to='/'>Cloud Scribe</Link></li>
             <li className={`flex flex-col`}>
               <Link onClick={() => { setExpand(false) }} to="/">Home</Link>
-              <span onClick={() => { setExpand(false) }} className={`bg-blue-400 ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
+              <span onClick={() => { setExpand(false) }} className={`bg-orange-400 ${location.pathname === '/' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
             </li>
             <li className={`flex flex-col`}>
               <Link onClick={() => { setExpand(false) }} to="/notes">Notes</Link>
