@@ -5,14 +5,20 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
 import Button from './Button';
 import modeContext from '../context/modes/modeContext';
+import queryContext from '../context/query/queryContext';
 
 const Navbar = (props) => {
 
+  const [search, expandSearch] = useState(false);
   const [mode, setMode] = useState('light');
   const [expand, setExpand] = useState(false);
   const [username, setUsername] = useState(false);
+  const [tempQuery, setTempQuery] = useState('');
   const context = useContext(modeContext);
   const { darkMode, setDarkMode } = context;
+  const query_Context = useContext(queryContext);
+  const { setQuery } = query_Context;
+
   let navigate = useNavigate()
 
   let location = useLocation();
@@ -54,7 +60,17 @@ const Navbar = (props) => {
   }
 
   const performSearch = () => {
-    props.showAlert('failure', 'Search feature is not available yet!.')
+    if (search) expandSearch(false)
+    else expandSearch(true)
+
+    const input = document.getElementById('inputSearch');
+    input.focus();
+    const inputSmall = document.getElementById('inputSearchSmall');
+    inputSmall.focus();
+  }
+
+  const setSearchQuery = (e) => {
+    setTempQuery(e.target.value)
   }
 
   window.addEventListener('locationchange', function () {
@@ -89,16 +105,22 @@ const Navbar = (props) => {
                 <Link className='flex justify-center items-center' to="/music">
                   Music
                   <FontAwesomeIcon onClick={performSearch} className='text-blue-400 mx-1 w-5 h-5 cursor-pointer' icon={faSearch} />
-                  </Link>
+                </Link>
                 <span className={`${darkMode ? 'bg-white' : 'bg-black'} ${location.pathname === '/music' ? 'animate-expand' : 'invisible'} rounded-xl h-[0.15rem]`}></span>
               </li>
             </ul>
+            <div className={`transition-all lg:left-1/4 lg:w-1/2 duration-500 ${search ? 'top-20' : 'top-[-45rem]'} absolute w-full z-40`}>
+              <div className={`search ${darkMode ? 'bg-gray-500 text-white' : 'bg-white text-black'} space-x-6 flex mx-4 lg:mx-16 rounded-xl p-8 shadow-2xl border border-[rgba(255,255,255,0.1)]`}>
+                <input onChange={setSearchQuery} className={`input w-full outline-none placeholder:text-white bg-transparent border-b p-2 ${darkMode ? 'border-[rgba(255,255,255,0.5)]' : 'border-black'} `} type="text" placeholder='Search for songs, artists...' name="search" id="inputSearch" />
+                <button onClick={() => { setQuery(tempQuery); performSearch(); }} className={`text-left w-fit p-2 rounded-md ${darkMode ? 'bg-[rgba(255,255,255,0.2)]' : 'bg-gray-200'} transition-all duration-150 hover:shadow-lg hover:-translate-y-1  border border-[rgba(255,255,255,0.1)]`}>Search</button>
+              </div>
+            </div>
           </div>
 
 
 
           <div className="right flex items-center space-x-4">
-            
+
             <div className="mode flex flex-col h-6 overflow-hidden">
               <div className={`flex flex-col transition-all duration-500 ${mode === 'light' ? '' : '-translate-y-9'}  space-y-4`}>
                 <FontAwesomeIcon className={`w-5 h-5 cursor-pointer text-blue-400`} id='moon' onClick={changeMode} icon={faMoon} />
@@ -157,6 +179,13 @@ const Navbar = (props) => {
               <div onClick={expandNav} className={`${expand ? '-rotate-45 translate-y-[0.45rem]' : ''} w-6 transition-all duration-300 rounded-full bg-black h-1`}></div>
               <div onClick={expandNav} className={`${expand ? 'scale-0' : ''} w-6 transition-all duration-300 rounded-full bg-black h-1`}></div>
               <div onClick={expandNav} className={`${expand ? 'rotate-45 -translate-y-2' : ''} w-6 transition-all duration-300 rounded-full bg-black h-1`}></div>
+            </div>
+          </div>
+
+          <div className={`transition-all duration-500 ${search ? 'top-16' : 'top-[-45rem]'} absolute -ml-1 w-full z-40`}>
+            <div className={`search ${darkMode ? 'bg-gray-500 text-white' : 'bg-white text-black'} space-x-6 flex mr-2 rounded-xl p-8 shadow-2xl border border-black`}>
+              <input id="inputSearchSmall" onChange={setSearchQuery} className={`input w-full outline-none placeholder:text-white bg-transparent border-b p-2 ${darkMode ? 'border-[rgba(255,255,255,0.5)]' : 'border-black'} `} type="text" placeholder='Search for songs, artists...' name="search" />
+              <button onClick={() => { setQuery(tempQuery); performSearch(); }} className={`text-left w-fit p-2 rounded-md ${darkMode ? 'bg-[rgba(255,255,255,0.2)]' : 'bg-gray-200'} transition-all duration-150 hover:shadow-lg hover:-translate-y-1  border border-[rgba(255,255,255,0.1)]`}>Search</button>
             </div>
           </div>
 

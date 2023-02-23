@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Contact from './components/Contact';
 import NoteState from './context/notes/NoteState';
 import ModeState from './context/modes/ModeState';
+import QueryState from './context/query/QueryState';
 import Footer from './components/Footer';
 import Notes from './components/Notes';
 import Create from './components/Create';
@@ -15,11 +16,11 @@ import Signup from './components/Signup';
 import Music from './components/Music';
 
 function App() {
-  const [alert , setAlert] = useState(null)
-  const showAlert = (type,message)=>{
+  const [alert, setAlert] = useState(null)
+  const showAlert = (type, message) => {
     setAlert({
-      type : type,
-      msg : message,
+      type: type,
+      msg: message,
     })
     setTimeout(() => {
       setAlert(null)
@@ -28,23 +29,25 @@ function App() {
   return (
     <div>
       <ModeState>
-      <NoteState>
-        <BrowserRouter>
-            <Navbar showAlert={showAlert} />
-            <Alert alert={alert}/>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/addnote" element={<Create showAlert={showAlert} />} />
-              <Route path="/notes" element={<Notes showAlert={showAlert} />} />
-              <Route path="/login" element={<Login showAlert={showAlert} />} />
-              <Route path="/signup" element={<Signup showAlert={showAlert} />} />
-              <Route path="/music" element={<Music/>} />
-              {/* <Route path="*" element={<NotFound />} /> */}
-            </Routes>
-            <Contact />
-            <Footer />
-        </BrowserRouter>
-      </NoteState>
+        <NoteState>
+          <QueryState>
+            <BrowserRouter>
+              <Navbar showAlert={showAlert} />
+              <Alert alert={alert} />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/addnote" element={<Create showAlert={showAlert} />} />
+                <Route path="/notes" element={<Notes showAlert={showAlert} />} />
+                <Route path="/login" element={<Login showAlert={showAlert} />} />
+                <Route path="/signup" element={<Signup showAlert={showAlert} />} />
+                <Route path="/music" element={<Music />} />
+                {/* <Route path="*" element={<NotFound />} /> */}
+              </Routes>
+              <Contact />
+              <Footer />
+            </BrowserRouter>
+          </QueryState>
+        </NoteState>
       </ModeState>
     </div>
   );
