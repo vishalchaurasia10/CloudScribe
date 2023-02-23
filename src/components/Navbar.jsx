@@ -71,6 +71,7 @@ const Navbar = (props) => {
 
   const setSearchQuery = (e) => {
     setTempQuery(e.target.value)
+    navigate('/music')
   }
 
   window.addEventListener('locationchange', function () {
