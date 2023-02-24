@@ -77,8 +77,18 @@ const Navbar = (props) => {
 
   const setSearchQuery = (e) => {
     setTempQuery(e.target.value)
-    navigate('/music')
   }
+
+  const handleSearch = () => {
+    setQuery(tempQuery);
+    performSearch();
+    navigate('/music')
+    let input = document.getElementById('inputSearch');
+    input.value = '';
+    let inputSmall = document.getElementById('inputSearchSmall');
+    inputSmall.value = '';
+  }
+
 
   window.addEventListener('locationchange', function () {
     console.log('location changed!');
@@ -119,7 +129,7 @@ const Navbar = (props) => {
             <div className={`transition-all lg:left-1/4 lg:w-1/2 duration-500 ${search ? 'top-20' : 'top-[-45rem]'} absolute w-full z-40`}>
               <div className={`search ${darkMode ? 'bg-gray-500 text-white' : 'bg-white text-black'} space-x-6 flex mx-4 lg:mx-16 rounded-xl p-8 shadow-2xl border border-[rgba(255,255,255,0.1)]`}>
                 <input onChange={setSearchQuery} className={`input w-full outline-none  bg-transparent border-b p-2 ${darkMode ? 'border-[rgba(255,255,255,0.5)] placeholder:text-white' : 'border-black placeholder:text-black'} `} type="text" placeholder='Search for songs, artists...' name="search" id="inputSearch" />
-                <button onClick={() => { setQuery(tempQuery); performSearch(); }} className={`text-left w-fit p-2 rounded-md ${darkMode ? 'bg-[rgba(255,255,255,0.2)]' : 'bg-gray-200'} transition-all duration-150 hover:shadow-lg hover:-translate-y-1  border border-[rgba(255,255,255,0.1)]`}>Search</button>
+                <button onClick={handleSearch} className={`text-left w-fit p-2 rounded-md ${darkMode ? 'bg-[rgba(255,255,255,0.2)]' : 'bg-gray-200'} transition-all duration-150 hover:shadow-lg hover:-translate-y-1  border border-[rgba(255,255,255,0.1)]`}>Search</button>
               </div>
             </div>
           </div>
@@ -192,7 +202,7 @@ const Navbar = (props) => {
           <div className={`transition-all duration-500 ${search ? 'top-16' : 'top-[-45rem]'} absolute -ml-1 w-full z-40`}>
             <div className={`search ${darkMode ? 'bg-gray-500 text-white' : 'bg-white text-black'} space-x-6 flex mr-2 rounded-xl p-8 shadow-2xl border border-black`}>
               <input id="inputSearchSmall" onChange={setSearchQuery} className={`input w-full outline-none  bg-transparent border-b p-2 ${darkMode ? 'border-[rgba(255,255,255,0.5)] placeholder:text-white' : 'border-black placeholder:text-black'} `} type="text" placeholder='Search for songs, artists...' name="search" />
-              <button onClick={() => { setQuery(tempQuery); performSearch(); }} className={`text-left w-fit p-2 rounded-md ${darkMode ? 'bg-[rgba(255,255,255,0.2)]' : 'bg-gray-200'} transition-all duration-150 hover:shadow-lg hover:-translate-y-1  border border-[rgba(255,255,255,0.1)]`}>Search</button>
+              <button onClick={handleSearch} className={`text-left w-fit p-2 rounded-md ${darkMode ? 'bg-[rgba(255,255,255,0.2)]' : 'bg-gray-200'} transition-all duration-150 hover:shadow-lg hover:-translate-y-1  border border-[rgba(255,255,255,0.1)]`}>Search</button>
             </div>
           </div>
 
