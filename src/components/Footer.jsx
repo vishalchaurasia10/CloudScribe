@@ -29,7 +29,7 @@ const Footer = () => {
                 <Link target={'_blank'} to=''>
                   <li className='ml-8'>Portfolio Site</li>
                 </Link>
-                <Link target={'_blank'} to='https://github.com/vishalchaurasia10/BlogSite'>
+                <Link target={'_blank'} to='https://the-daily-scoop.vercel.app/'>
                   <li className='ml-8'>Blogging Site</li>
                 </Link>
                 <Link target={'_blank'} to='https://the-insight-news.vercel.app/'>
