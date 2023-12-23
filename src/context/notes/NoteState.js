@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
-    const host = "https://cloud-scribe-backend.onrender.com/api/notes";
+    const host = `${process.env.REACT_APP_API_URL}/api/notes`;
     const notesInitial = []
 
     const [notes, setNotes] = useState(notesInitial);
@@ -40,7 +40,7 @@ const NoteState = (props) => {
                 'auth-token': localStorage.getItem('token')
             },
         })
-        fetchAllNotes();      
+        fetchAllNotes();
         return await reponse.json();
     }
 

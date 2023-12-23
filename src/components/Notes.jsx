@@ -87,7 +87,7 @@ const Notes = (props) => {
                     </Link>
                 </div>
             </div>
-            <div className={`notesContainer transition-all duration-300 ${darkMode?'bg-[#212E35]':''} lg:px-32 bg-no-repeat bg-center bg-cover pt-28 pb-12 lg:pb-0 bg-[url(/src/assets/addBackground.svg)] space-y-10`}>
+            <div className={`notesContainer min-h-screen transition-all duration-300 ${darkMode?'bg-[#212E35]':''} lg:px-32 bg-no-repeat bg-center bg-cover pt-28 pb-12 lg:pb-0 bg-[url(/src/assets/addBackground.svg)] space-y-10`}>
                 <h1 className={`${darkMode?'text-white':''} transition-all duration-500 text-5xl -mt-8 lg:mt-0 m-4 font-extrabold font-jost`}>Your Notes</h1>
                 {notes.length !== 0 ? <div className={`notes lg:flex flex-wrap`}>
                     {notes.map((note) => {
